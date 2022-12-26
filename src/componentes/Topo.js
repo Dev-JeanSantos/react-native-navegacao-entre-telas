@@ -1,5 +1,6 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 
 import Texto from './Texto';
 
@@ -11,13 +12,18 @@ const largura = Dimensions.get('screen').width;
 const ALTURA_PADRAO = 270;
 
 export default function Topo({ titulo, imagem = topo, altura = ALTURA_PADRAO }) {
+
+  const navigator = useNavigation()
+
   const estilos = funcaoEstilos(altura);
   return <>
     <Image source={imagem} style={estilos.topo} />
     <Gradiente width={largura} height={130 / 360 * largura} style={estilos.gradiente}/>
     <Texto style={estilos.titulo}>{ titulo }</Texto>
     <TouchableOpacity 
-      onPress={() => {}}
+      onPress={() => {
+        navigator.goBack();
+      }}
       style={estilos.botaoVoltar}>
       <VoltarSVG color='white' style={estilos.voltar} />
     </TouchableOpacity>
